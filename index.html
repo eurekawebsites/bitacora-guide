@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f2a5c" />
+  <meta name="description" content="Guía rápida para conocer y evaluar el demo de Bitácora de Eureka Tech." />
+  <link rel="icon" type="image/png" href="../icons/icon-192.png" />
+  <title>Bitácora | Guía rápida del demo</title>
+  <style>
+    :root {
+      --ink: #14213d;
+      --navy: #0f2a5c;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --lavender: #eef2ff;
+      --sky: #e0f2fe;
+      --mint: #d1fae5;
+      --rose: #fce7f3;
+      --mist: #f7f9fc;
+      --line: #dce4f0;
+      --muted: #667085;
+      --white: #fff;
+      --shadow: 0 24px 64px rgba(15, 42, 92, .14);
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: #fbfcff; font-size: 16px; line-height: 1.65; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .shell { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid rgba(220, 228, 240, .9); background: rgba(251, 252, 255, .92); backdrop-filter: blur(14px); }
+    .topbar-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 850; letter-spacing: -.025em; }
+    .brand img { width: 44px; height: 44px; border-radius: 13px; box-shadow: 0 9px 22px rgba(37, 99, 235, .2); }
+    .brand span { display: grid; line-height: 1.15; }
+    .brand small { color: var(--muted); font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .topnav { display: flex; align-items: center; gap: 22px; }
+    .topnav a { color: var(--muted); font-size: 14px; font-weight: 750; text-decoration: none; }
+    .topnav a:hover { color: var(--blue); }
+    .topnav .button-link { color: var(--white); }
+
+    .hero { padding: 80px 0 56px; overflow: hidden; background: radial-gradient(circle at 86% 13%, rgba(56, 189, 248, .19), transparent 35%), radial-gradient(circle at 9% 38%, rgba(139, 92, 246, .11), transparent 28%); }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 62px; }
+    .eyebrow, .pill { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; margin: 0; padding: 6px 12px; border-radius: 999px; background: var(--lavender); color: var(--blue-dark); font-size: 13px; font-weight: 850; line-height: 1.2; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
+    h1, h2, h3 { margin: 0; line-height: 1.08; letter-spacing: -.04em; }
+    h1 { max-width: 680px; margin-top: 22px; font-size: clamp(48px, 6.5vw, 76px); }
+    h1 em { color: var(--blue); font-style: normal; }
+    .lead { max-width: 650px; margin: 24px 0 0; color: var(--muted); font-size: 20px; line-height: 1.55; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 13px 20px; border: 1px solid var(--blue); border-radius: 14px; background: var(--blue); color: var(--white); font-size: inherit; font-weight: 800; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(37, 99, 235, .24); }
+    .button.secondary { border-color: var(--line); background: var(--white); color: var(--blue-dark); }
+    .button.ghost { border-color: rgba(255,255,255,.72); background: transparent; color: var(--white); }
+    .hero-note { margin: 16px 0 0; color: var(--muted); font-size: 14px; }
+
+    .hero-visual { position: relative; min-height: 520px; }
+    .hero-visual::before { content: ""; position: absolute; inset: 3% 4% 7% 2%; border-radius: 46% 54% 50% 50%; background: linear-gradient(145deg, #dbeafe, #ddd6fe); transform: rotate(-5deg); }
+    .app-window { position: absolute; inset: 9% 0 5% 3%; overflow: hidden; border: 8px solid var(--white); border-radius: 26px; background: var(--white); box-shadow: var(--shadow); }
+    .app-head { min-height: 82px; display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: linear-gradient(135deg, var(--navy), var(--blue)); color: var(--white); }
+    .app-head img { width: 46px; height: 46px; border-radius: 13px; }
+    .app-head strong { display: block; font-size: 18px; }
+    .app-head span { display: block; color: rgba(255,255,255,.74); font-size: 13px; }
+    .app-body { display: grid; grid-template-columns: 122px 1fr; min-height: 355px; }
+    .app-nav { padding: 20px 12px; background: #f8fafc; border-right: 1px solid var(--line); }
+    .app-nav span { display: block; margin-bottom: 10px; padding: 9px 10px; border-radius: 9px; color: var(--muted); font-size: 12px; font-weight: 750; }
+    .app-nav span:first-child { background: var(--lavender); color: var(--blue); }
+    .app-main { padding: 24px; }
+    .app-main h3 { font-size: 26px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+    .metric { min-height: 86px; padding: 14px; border: 1px solid var(--line); border-radius: 13px; background: var(--white); }
+    .metric b { display: block; font-size: 24px; line-height: 1.2; }
+    .metric small { color: var(--muted); }
+    .activity { margin-top: 15px; padding: 16px; border-radius: 14px; background: var(--mist); }
+    .activity-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+    .activity-row:last-child { border-bottom: 0; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #10b981; }
+    .proof-badge { position: absolute; top: 0; right: -2%; z-index: 2; width: 116px; height: 116px; display: grid; place-items: center; border-radius: 50%; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 900; line-height: 1.25; text-align: center; text-transform: uppercase; transform: rotate(7deg); box-shadow: 0 15px 30px rgba(15, 42, 92, .22); }
+
+    .trust-strip { margin: 8px auto 74px; display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--white); box-shadow: 0 12px 35px rgba(15, 42, 92, .07); }
+    .trust-item { min-height: 96px; padding: 22px 26px; display: flex; align-items: center; gap: 14px; }
+    .trust-item + .trust-item { border-left: 1px solid var(--line); }
+    .trust-icon { flex: 0 0 42px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; background: var(--lavender); color: var(--blue); font-weight: 900; }
+    .trust-item strong { display: block; line-height: 1.25; }
+    .trust-item > div > span { display: block; margin-top: 3px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+
+    section { scroll-margin-top: 96px; }
+    .section { padding: 80px 0; }
+    .section.alt { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--white); }
+    .section-heading { max-width: 790px; margin-bottom: 40px; }
+    .section-heading h2 { margin-top: 16px; font-size: clamp(38px, 5vw, 56px); }
+    .section-heading p:last-child { margin: 18px 0 0; color: var(--muted); font-size: 18px; }
+
+    .start-card { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 28px; margin-bottom: 24px; padding: 30px; border-radius: 24px; background: linear-gradient(135deg, var(--navy), #244da0); color: var(--white); box-shadow: var(--shadow); }
+    .start-card h3 { margin-top: 10px; font-size: 32px; }
+    .start-card p { margin: 12px 0 0; color: rgba(255,255,255,.76); }
+    .start-card .pill { background: rgba(255,255,255,.13); color: var(--white); }
+    .start-card .button { border-color: var(--white); background: var(--white); color: var(--navy); }
+
+    .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .role-card { padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: 0 12px 30px rgba(15, 42, 92, .05); }
+    .role-card:nth-child(2) { background: #fcfdff; }
+    .role-card:nth-child(3) { background: #fffefe; }
+    .role-card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .role-card h3 { font-size: 29px; }
+    .role-card .login { margin: 20px 0 0; padding: 15px 16px; border-radius: 14px; background: var(--mist); }
+    .role-card .login strong { display: block; font-size: 13px; }
+    .role-card .login code { color: var(--blue-dark); font-size: 13px; overflow-wrap: anywhere; }
+    .role-card ul { margin: 20px 0 0; padding: 0; list-style: none; }
+    .role-card li { position: relative; margin-top: 11px; padding-left: 27px; color: var(--muted); }
+    .role-card li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--blue); font-weight: 900; }
+    .password-note { margin: 22px 0 0; padding: 18px 20px; border: 1px dashed #aebfe7; border-radius: 16px; background: var(--lavender); color: var(--ink); }
+    .password-note code { color: var(--blue-dark); font-size: 16px; font-weight: 800; }
+
+    .flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .flow-card { min-height: 248px; padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: 0 12px 30px rgba(15, 42, 92, .05); }
+    .step-number { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--blue); color: var(--white); font-weight: 900; line-height: 1; }
+    .flow-card h3 { margin-top: 24px; font-size: 27px; }
+    .flow-card p { margin: 14px 0 0; color: var(--muted); }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .feature-card { min-height: 250px; padding: 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); }
+    .feature-card:nth-child(1) { background: var(--sky); }
+    .feature-card:nth-child(2) { background: var(--mint); }
+    .feature-card:nth-child(3) { background: var(--lavender); }
+    .feature-card:nth-child(4) { background: var(--rose); }
+    .feature-card h3 { margin-top: 18px; font-size: 31px; }
+    .feature-card p { margin: 14px 0 0; color: #536176; }
+    .feature-card ul { margin: 18px 0 0; padding-left: 21px; }
+
+    .review-box { padding: clamp(30px, 5vw, 56px); border-radius: 28px; background: var(--navy); color: var(--white); }
+    .review-box .eyebrow { background: rgba(255,255,255,.13); color: var(--white); }
+    .review-box h2 { margin-top: 18px; font-size: clamp(38px, 5vw, 56px); }
+    .review-box > p { max-width: 760px; margin: 18px 0 0; color: rgba(255,255,255,.76); font-size: 18px; }
+    .checklist { margin: 34px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 13px 22px; }
+    .check { min-height: 54px; display: flex; align-items: center; gap: 13px; padding: 13px 15px; border-radius: 15px; background: rgba(255,255,255,.09); }
+    .check span { flex: 0 0 28px; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--white); color: var(--navy); font-weight: 900; line-height: 1; }
+    .scope-note { margin-top: 24px; color: rgba(255,255,255,.7); font-size: 14px; }
+
+    footer { padding: 38px 0 46px; color: var(--muted); font-size: 14px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding-top: 26px; }
+
+    @media (max-width: 980px) {
+      .topnav a:not(.button-link) { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 38px; }
+      .hero-visual { min-height: 500px; }
+      .role-grid { grid-template-columns: 1fr; }
+      .flow-grid { grid-template-columns: 1fr; }
+      .flow-card { min-height: 0; }
+      .trust-strip { grid-template-columns: 1fr; }
+      .trust-item + .trust-item { border-top: 1px solid var(--line); border-left: 0; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 24px, 1160px); }
+      .topbar-inner { min-height: 64px; }
+      .brand img { width: 38px; height: 38px; }
+      .brand small { display: none; }
+      .topnav { gap: 10px; }
+      .topnav .button-link { font-size: 13px; }
+      .hero { padding: 46px 0 32px; }
+      h1 { font-size: clamp(42px, 13vw, 58px); }
+      .lead { font-size: 18px; }
+      .actions { display: grid; }
+      .button { width: 100%; }
+      .hero-visual { min-height: 385px; }
+      .app-window { inset: 7% 0 3%; }
+      .app-body { grid-template-columns: 78px 1fr; min-height: 280px; }
+      .app-nav { padding: 12px 7px; }
+      .app-nav span { padding: 7px 5px; font-size: 9px; }
+      .app-main { padding: 17px 12px; }
+      .app-main h3 { font-size: 20px; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .metric { min-height: 56px; padding: 10px; }
+      .metric:nth-child(n+2) { display: none; }
+      .proof-badge { width: 88px; height: 88px; font-size: 10px; }
+      .section { padding: 58px 0; }
+      .section-heading { margin-bottom: 28px; }
+      .start-card { grid-template-columns: 1fr; }
+      .feature-grid, .checklist { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="Guía rápida de Bitácora">
+        <img src="../icons/icon-192.png" alt="Bitácora" width="44" height="44" />
+        <span>Bitácora <small>Guía rápida del demo</small></span>
+      </a>
+      <nav class="topnav" aria-label="Secciones de la guía">
+        <a href="#accesos">Accesos</a>
+        <a href="#recorrido">Recorrido</a>
+        <a href="#revision">Lista de revisión</a>
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQHS-9Of9oscsS-bCTBv_cGEkCRoBEaMk1KASs7j962L_dJpvKqmlkQqbzxcPQjK1El8beLxab1vPTW/pubhtml" target="_blank" rel="noreferrer">Ver cotización</a>
+        <a class="button-link" href="https://bitacora-demo-eureka.web.app/login" target="_blank" rel="noreferrer">Abrir demo ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Demo comercial de Eureka Tech</p>
+          <h1>La operación diaria de tu escuela, <em>clara y conectada.</em></h1>
+          <p class="lead">Bitácora reúne administración, maestros y familias en un solo lugar para coordinar alumnos, asistencia, entradas y salidas, comunicación, actividades y cobranza.</p>
+          <div class="actions">
+            <a class="button" href="https://bitacora-demo-eureka.web.app/login" target="_blank" rel="noreferrer">Abrir el demo de Bitácora ↗</a>
+            <a class="button secondary" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQHS-9Of9oscsS-bCTBv_cGEkCRoBEaMk1KASs7j962L_dJpvKqmlkQqbzxcPQjK1El8beLxab1vPTW/pubhtml" target="_blank" rel="noreferrer">Ver cotización</a>
+          </div>
+          <p class="hero-note">Empieza con Administración y reserva entre 15 y 20 minutos para el recorrido completo.</p>
+        </div>
+        <div class="hero-visual" aria-label="Vista ilustrativa del panel de Bitácora">
+          <div class="proof-badge">3 roles<br />conectados</div>
+          <div class="app-window">
+            <div class="app-head"><img src="../icons/icon-192.png" alt="" /><div><strong>Bitácora</strong><span>Centro Infantil Arcoíris · Demo</span></div></div>
+            <div class="app-body">
+              <div class="app-nav"><span>Inicio</span><span>Alumnos</span><span>Aulas</span><span>Mensajes</span><span>Cobranza</span></div>
+              <div class="app-main"><h3>Resumen de hoy</h3><div class="metric-grid"><div class="metric"><b>24</b><small>alumnos</small></div><div class="metric"><b>21</b><small>presentes</small></div><div class="metric"><b>3</b><small>avisos</small></div></div><div class="activity"><div class="activity-row"><span class="dot"></span>Entrada registrada con QR</div><div class="activity-row"><span class="dot"></span>Nuevo aviso para familias</div><div class="activity-row"><span class="dot"></span>Pago aplicado correctamente</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell trust-strip" aria-label="Capacidades principales de Bitácora">
+      <div class="trust-item"><span class="trust-icon" aria-hidden="true">3</span><div><strong>Perfiles por rol</strong><span>Administración, maestros y familias</span></div></div>
+      <div class="trust-item"><span class="trust-icon" aria-hidden="true">QR</span><div><strong>Entradas y salidas</strong><span>Registro rápido con responsables autorizados</span></div></div>
+      <div class="trust-item"><span class="trust-icon" aria-hidden="true">✓</span><div><strong>Operación conectada</strong><span>Comunicación, reportes y cobranza</span></div></div>
+    </div>
+
+    <section class="section alt" id="accesos">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Accesos del demo</p>
+          <h2>¿Con qué cuenta debes entrar?</h2>
+          <p><strong>Empieza con Administración.</strong> Ahí verás la operación completa. Continúa con Maestra para revisar el trabajo del aula y termina con Padre/Tutor para confirmar la experiencia de la familia.</p>
+        </div>
+
+        <div class="start-card">
+          <div><span class="pill">Empieza aquí</span><h3>Cuenta de Administración</h3><p>Revisa el panel, alumnos, aulas, entradas y salidas, comunicación, reportes y cobranza.</p></div>
+          <a class="button" href="https://bitacora-demo-eureka.web.app/login" target="_blank" rel="noreferrer">Entrar al demo ↗</a>
+        </div>
+
+        <div class="role-grid">
+          <article class="role-card">
+            <div class="role-card-header"><h3>Administración</h3><span class="pill">Primero</span></div>
+            <div class="login"><strong>Correo</strong><code>admin@demo-bitacora.test</code></div>
+            <ul><li>Revisar el resumen operativo</li><li>Abrir alumnos, aulas y responsables</li><li>Explorar QR, asistencia y reportes</li><li>Consultar cobranza, gastos y proveedores</li></ul>
+          </article>
+          <article class="role-card">
+            <div class="role-card-header"><h3>Maestra</h3><span class="pill">Segundo</span></div>
+            <div class="login"><strong>Correo</strong><code>maestra@demo-bitacora.test</code></div>
+            <ul><li>Ver el aula asignada</li><li>Consultar asistencia</li><li>Enviar mensajes y revisar avisos</li><li>Registrar actividades del grupo</li></ul>
+          </article>
+          <article class="role-card">
+            <div class="role-card-header"><h3>Padre/Tutor</h3><span class="pill">Tercero</span></div>
+            <div class="login"><strong>Correo</strong><code>padre@demo-bitacora.test</code></div>
+            <ul><li>Ver únicamente al menor vinculado</li><li>Consultar actividades y avisos</li><li>Usar mensajes privados</li><li>Revisar perfil y responsables autorizados</li></ul>
+          </article>
+        </div>
+        <p class="password-note"><strong>Contraseña para las tres cuentas:</strong> <code>Demo1234!</code><br />El demo usa registros ficticios. No ingreses información real de alumnos, familias o personal.</p>
+      </div>
+    </section>
+
+    <section class="section" id="recorrido">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Recorrido recomendado</p>
+          <h2>Una historia completa en tres pasos.</h2>
+          <p>El objetivo no es abrir cada pantalla. Sigue este flujo para entender cómo Bitácora conecta la operación escolar con el aula y la familia.</p>
+        </div>
+        <div class="flow-grid">
+          <article class="flow-card"><span class="step-number">1</span><h3>Configura y supervisa</h3><p>Desde Administración revisa alumnos, aulas, responsables, calendario, accesos QR y el resumen operativo.</p></article>
+          <article class="flow-card"><span class="step-number">2</span><h3>Trabaja con el aula</h3><p>Como Maestra consulta el grupo, registra actividades y usa la comunicación dentro de los permisos asignados.</p></article>
+          <article class="flow-card"><span class="step-number">3</span><h3>Confirma la experiencia familiar</h3><p>Como Padre/Tutor comprueba que la información sea clara, privada y limitada al menor vinculado.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" aria-label="Funciones destacadas de Bitácora">
+      <div class="shell">
+        <div class="section-heading"><p class="eyebrow">Qué observar</p><h2>Las funciones que sostienen el día a día.</h2><p>Bitácora concentra los flujos más importantes sin obligar a la escuela a coordinarse entre hojas, chats y registros separados.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card"><span class="pill">Operación</span><h3>Alumnos, aulas y asistencia.</h3><p>Expedientes, contactos autorizados, grupos, horarios, evaluaciones de salud y seguimiento operativo.</p><ul><li>Información centralizada</li><li>Permisos claros por perfil</li><li>Reportes y exportaciones</li></ul></article>
+          <article class="feature-card"><span class="pill">Seguridad diaria</span><h3>Entradas y salidas con QR.</h3><p>El personal puede identificar al alumno y confirmar al responsable autorizado durante la entrega.</p><ul><li>Registro de entrada y salida</li><li>Responsables vinculados</li><li>Estado claro cuando aún no se permite la salida</li></ul></article>
+          <article class="feature-card"><span class="pill">Comunicación</span><h3>Mensajes, avisos y actividades.</h3><p>La escuela se comunica con la audiencia correcta y las familias consultan la información relevante para sus hijos.</p><ul><li>Mensajes privados</li><li>Avisos por audiencia</li><li>Actividades del grupo</li></ul></article>
+          <article class="feature-card"><span class="pill">Administración</span><h3>Cobranza y control financiero.</h3><p>Cargos, pagos, recibos, productos, gastos y proveedores viven dentro del mismo contexto escolar.</p><ul><li>Movimientos protegidos contra duplicados</li><li>Recibos y estatus claros</li><li>Consulta por alumno</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="revision">
+      <div class="shell review-box">
+        <p class="eyebrow">Revisión de 15–20 minutos</p>
+        <h2>Qué validar antes de solicitar una propuesta.</h2>
+        <p>Usa el demo de forma natural y confirma si estos flujos responden a la operación de tu escuela.</p>
+        <div class="checklist">
+          <div class="check"><span>1</span>El panel administrativo se entiende rápido</div>
+          <div class="check"><span>2</span>Los expedientes y aulas están bien organizados</div>
+          <div class="check"><span>3</span>El flujo QR de entrada y salida es claro</div>
+          <div class="check"><span>4</span>Los permisos de la maestra son adecuados</div>
+          <div class="check"><span>5</span>Mensajes y avisos llegan a la audiencia correcta</div>
+          <div class="check"><span>6</span>La familia ve sólo la información vinculada</div>
+          <div class="check"><span>7</span>Cobranza y reportes cubren lo esencial</div>
+          <div class="check"><span>8</span>La experiencia móvil resulta cómoda</div>
+        </div>
+        <div class="actions">
+          <a class="button" href="https://bitacora-demo-eureka.web.app/login" target="_blank" rel="noreferrer">Iniciar recorrido del demo ↗</a>
+          <a class="button ghost" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQHS-9Of9oscsS-bCTBv_cGEkCRoBEaMk1KASs7j962L_dJpvKqmlkQqbzxcPQjK1El8beLxab1vPTW/pubhtml" target="_blank" rel="noreferrer">Ver precio y alcance</a>
+          <a class="button ghost" href="#top">Volver arriba</a>
+        </div>
+        <p class="scope-note">Bitácora se ofrece actualmente como aplicación web instalable (PWA) en un ambiente dedicado por escuela. Las aplicaciones nativas y la edición multiinstitución no forman parte de esta cotización.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner"><strong>Bitácora · Eureka Tech</strong><span>Guía comercial del demo · Sólo utiliza información ficticia</span></div>
+  </footer>
+</body>
+</html>

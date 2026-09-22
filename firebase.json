@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "bitacora-guide",
     "public": ".",
     "ignore": [
       "firebase.json",

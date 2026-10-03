@@ -1,6 +1,12 @@
 name: Deploy bitacora-guide to Firebase Hosting
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - Guia-rapida-Bitacora.pdf
+      - index.html
+      - .github/workflows/firebase-hosting.yml
   workflow_dispatch:
 
 jobs:

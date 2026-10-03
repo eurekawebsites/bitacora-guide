@@ -8,6 +8,7 @@
       "CNAME",
       "README.md",
       "**/.*",
+      "**/.*/**",
       "**/node_modules/**"
     ]
   }
